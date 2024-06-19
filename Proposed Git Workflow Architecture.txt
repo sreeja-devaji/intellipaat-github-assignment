@@ -1,0 +1,96 @@
+Proposed Git Workflow Architecture
+
+Main Branches:
+
+1. main: The main production branch where stable code is deployed.
+2. develop: The integration branch for features and bug fixes. This branch should always be stable and ready for release.
+
+Supporting Branches:
+
+1. feature/*: Branches for developing new features.
+2. bugfix/*: Branches for fixing bugs.
+3. release/*: Branches for preparing a new release.
+4. hotfix/*: Branches for urgent fixes in the production.
+
+Workflow:
+
+1. Developers create feature/* branches from the develop branch.
+2. Once a feature is complete, it is merged back into develop.
+3. When the release date (25th of every month) is approaching, a release/* branch is created from develop.
+4. Final testing and minor fixes are applied to the release/* branch.
+5. On the 25th, the release/* branch is merged into main and tagged for release.
+6. Any hotfixes needed for the production are made in hotfix/* branches, merged into both main and develop.
+7. Pseudo Code Files and Branch Simulation
+
+
+1. Setup Repository:
+
+git init zendriix-softwares
+cd zendriix-softwares
+git checkout -b develop
+
+
+2. Create a Feature Branch:
+
+git checkout -b feature/user-authentication
+# Add pseudo code for user authentication
+echo "class UserAuth {}" > user_auth.py
+git add user_auth.py
+git commit -m "Add user authentication feature"
+git checkout develop
+git merge feature/user-authentication
+
+
+3. Create Another Feature Branch:
+
+git checkout -b feature/payment-gateway
+# Add pseudo code for payment gateway
+echo "class PaymentGateway {}" > payment_gateway.py
+git add payment_gateway.py
+git commit -m "Add payment gateway feature"
+git checkout develop
+git merge feature/payment-gateway
+
+
+4.Create a Release Branch:
+
+git checkout -b release/1.0.0
+# Perform final testing and fixes
+echo "# Version 1.0.0" > README.md
+git add README.md
+git commit -m "Prepare release 1.0.0"
+
+
+5. Merge Release Branch into Main:
+
+git checkout main
+git merge release/1.0.0
+git tag -a v1.0.0 -m "Release version 1.0.0"
+
+
+6. Create a Hotfix Branch (if needed):
+
+git checkout -b hotfix/urgent-fix
+# Fix urgent issue
+echo "fix critical bug" >> critical_fix.py
+git add critical_fix.py
+git commit -m "Fix critical issue"
+git checkout main
+git merge hotfix/urgent-fix
+git checkout develop
+git merge hotfix/urgent-fix
+
+
+This workflow ensures that:
+
+1. Features are developed in isolation.
+2. The develop branch is always in a stable state and ready for the next release.
+3. Releases are prepared and finalized in release/* branches, ensuring the main branch only contains production-ready code.
+4. Hotfixes can be quickly applied to both main and develop branches to ensure stability in production and continuity in development.
+5. This architecture will help Zendriix Softwares manage their product releases effectively, ensuring consistent and stable releases on the 25th of every month.
+
+
+
+
+
+
