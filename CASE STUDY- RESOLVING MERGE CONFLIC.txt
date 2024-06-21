@@ -1,0 +1,90 @@
+CASE STUDY- RESOLVING MERGE CONFLICTS
+
+To accomplish the tasks outlined, we need to follow a series of steps using Git commands. 
+
+1. **Clone the repository:**
+
+   First, clone the repository to your local machine.
+
+   ```bash
+   git clone https://github.com/devops-intellipaat/merge-conflict.git
+   cd merge-conflict
+   ```
+
+2. **Update Feature1 and Feature2 branches with the Security Patch:**
+
+   We need to rebase the `feature1` and `feature2` branches onto the `master` branch to include the security patch.
+
+   ```bash
+   # Checkout the master branch and pull the latest changes
+   git checkout master
+   git pull origin master
+
+   # Checkout feature1 branch and rebase onto master
+   git checkout feature1
+   git rebase master
+
+   # Resolve any conflicts if they arise
+   # After resolving conflicts, continue rebase
+   git rebase --continue
+
+   # Push the updated feature1 branch
+   git push origin feature1
+
+   # Checkout feature2 branch and rebase onto master
+   git checkout feature2
+   git rebase master
+
+   # Resolve any conflicts if they arise
+   # After resolving conflicts, continue rebase
+   git rebase --continue
+
+   # Push the updated feature2 branch
+   git push origin feature2
+   ```
+
+3. **Apply changes of Feature1 and Feature2 branches on master:**
+
+   Next, merge the changes from `feature1` and `feature2` into `master`.
+
+   ```bash
+   # Checkout the master branch
+   git checkout master
+
+   # Merge feature1 into master
+   git merge feature1
+
+   # Resolve any conflicts if they arise and commit the merge
+   # Push the updated master branch
+   git push origin master
+
+   # Merge feature2 into master
+   git merge feature2
+
+   # Resolve any conflicts if they arise and commit the merge
+   # Push the updated master branch
+   git push origin master
+   ```
+
+4. **Finally push all the branches to GitHub:**
+
+   Ensure all branches are pushed to GitHub.
+
+   ```bash
+   # Push the master branch
+   git push origin master
+
+   # Push the feature1 branch
+   git push origin feature1
+
+   # Push the feature2 branch
+   git push origin feature2
+   ```
+
+In summary, the key steps are:
+- Rebasing `feature1` and `feature2` branches onto `master` to include the security patch.
+- Merging `feature1` and `feature2` into `master` to apply their changes.
+- Resolving any conflicts during the rebase and merge processes.
+- Pushing all changes back to GitHub.
+
+By following these steps, you will successfully update the `feature1` and `feature2` branches with the security patch and apply their changes to the `master` branch.
